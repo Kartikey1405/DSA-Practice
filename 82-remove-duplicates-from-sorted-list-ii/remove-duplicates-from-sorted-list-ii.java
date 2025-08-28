@@ -18,26 +18,29 @@ class Solution {
         {
             
             
+            
            if(current.val==current.next.val)
-           {
+           {ListNode temp=current;
         
-            while(current.next!=null && current.val==current.next.val)
+            while(temp.next!=null && temp.val==temp.next.val)
             {
-                current=current.next;
+                temp=temp.next;
             }
-            prev.next=current.next;
+            prev.next=temp.next;
+            current=temp.next;
           
             
            }
            else{
             prev=prev.next;
+              current=current.next;
                  
 
            
         
 
            }
-             current=current.next;
+           
            
             
         }
