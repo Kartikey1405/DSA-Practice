@@ -12,44 +12,25 @@ class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
         if(lists.length==0)
         return null;
-        ListNode head=null;
-
-        for(int i=0;i<lists.length;i++)
+        PriorityQueue<ListNode> pq=new PriorityQueue<>((a,b)->a.val-b.val);
+        for(ListNode node:lists)
         {
-            ListNode current=lists[i];
-            head=mergeList(head,current);
-
-            
-
+            if(node!=null)
+            {
+                pq.add(node);
+            }
         }
-        return head;
-    }
-    ListNode mergeList(ListNode l1,ListNode l2)
-    {
-      
-        ListNode head=new ListNode(-1);
-        ListNode dummy=head;
-        while(l1!=null && l2!=null)
+        ListNode dummy=new ListNode(-1);
+        ListNode current=dummy;
+        while(!pq.isEmpty())
         {
-            if(l1.val<=l2.val)
-            {
-                dummy.next=l1;
-                l1=l1.next;
-                
-
-            }
-            else
-            {
-                dummy.next=l2;
-                l2=l2.next;
-
-            }
-            dummy=dummy.next;
+            ListNode node=pq.poll();
+            current.next=node;
+            current=current.next;
+            if(node.next!=null)
+            pq.add(node.next);
         }
-       if(l1!=null)
-     dummy.next=l1;
-        if(l2!=null)
-       dummy.next=l2;
-        return head.next;
+        return dummy.next;
+        
     }
 }
